@@ -74,6 +74,21 @@ void mostrarAdelante(Nodo* head) {
     }
 }
 
+void mostrarAtras(Nodo* tail) {
+    if (tail == NULL) {
+        cout << "⚠️ Lista vacia.\n";
+        return;
+    }
+
+    Nodo* aux = tail;
+    cout << "\n--- LISTA ATRAS ---\n";
+    while (aux != NULL) {
+        cout << "ID: " << aux->id
+             << " | Nombre: " << aux->nombre
+             << " | Peso: " << aux->peso << " kg\n";
+        aux = aux->ant;
+    }
+}
 
 
 int main(){

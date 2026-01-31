@@ -11,6 +11,17 @@ Nodo* sig;
 Nodo* ant;
 };
 
+Nodo* buscarporId(Nodo* head, int id){
+    Nodo* aux = head;
+    while (aux != nullptr){
+        if (aux->id == id){
+            return aux;
+        }
+        aux = aux->sig;
+    }
+    return nullptr;
+}
+ 
 
 
 

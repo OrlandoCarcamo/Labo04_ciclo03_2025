@@ -21,6 +21,24 @@ Nodo* buscarPorId(Nodo* head, int id){
     }
     return nullptr;
 }
+void insertarInicio(Nodo*& head, Nodo*& tail, int id, string nombre, float peso) {
+    if (buscarPorId(head, id) != NULL) {
+        cout << " Error: ID repetido.\n";
+        return;
+    }
+
+    Nodo* nuevo = new Nodo{id, nombre, peso, NULL, NULL};
+
+    if (head == NULL) {
+        head = tail = nuevo;
+    } else {
+        nuevo->sig = head;
+        head->ant = nuevo;
+        head = nuevo;
+    }
+
+    cout << " Paquete insertado al inicio.\n";
+}
  
 void insertarFinal(Nodo*& head, Nodo*& tail, int id, string nombre, float peso) {
     if (buscarPorId(head, id) != NULL) {
@@ -38,7 +56,7 @@ void insertarFinal(Nodo*& head, Nodo*& tail, int id, string nombre, float peso) 
         tail = nuevo;
     }
 
-    cout << "✅ Paquete insertado al final.\n";
+    cout << " Paquete insertado al final.\n";
 }
 
 

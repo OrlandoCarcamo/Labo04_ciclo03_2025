@@ -3,9 +3,12 @@ using namespace std;
 
 
 struct Nodo {
- int dato;
- Nodo* sig;
- Nodo* ant;
+int id;
+string nombre;
+float peso;
+int dato;
+Nodo* sig;
+Nodo* ant;
 };
 
 

@@ -129,6 +129,7 @@ bool eliminar(Nodo*& head, Nodo*& tail, int id ){
         return false;
     
     }
+
 // funcion para liberar los elementos de la lista, se guarda el nodo actual y se mueve al siguiente antes de borrar
 void liberarlist(Nodo*& head, Nodo *& tail){
     Nodo* aux= head;
@@ -155,6 +156,111 @@ int contarpacks(Nodo* head){
 };
 
 int main(){
+int id;
+string nombre;
+float peso;
+int opcion;
 
+Nodo* head = nullptr;
+Nodo* tail = nullptr;
+  
+    do{
+    cout << "......Bienvenido......" << endl;
+    cout << "Seleccione una opcion:" << endl;
+    cout << "1) Insertar paquete al final." << endl;
+    cout << "2) Insertar paquete al inicio." << endl;
+    cout << "3) Mostrar lista adelante." << endl;
+    cout << "4) Mostrar lista atras." << endl;
+    cout << "5) Buscar paquete por id." << endl;
+    cout << "6) Eliminar paquete por id." << endl;
+    cout << "7) Liberar lista." << endl;
+    cout << "8) Mostrar cantidad de paquetes." << endl;
+    cout << "9) Salir." << endl;
+cin >> opcion;
+
+switch (opcion){
+    
+    case 1:    
+    cout << "ID: ";
+        cin >> id;
+    cout << "Nombre: ";
+        cin >> nombre;
+    cout << "Peso: ";
+        cin >> peso;
+    insertarFinal( head, tail, id, nombre, peso);
+    break;
+
+
+
+    case 2:  
+    cout << "ID: ";
+        cin >> id;
+    cout << "Nombre: ";
+        cin >> nombre;
+    cout << "Peso: ";
+        cin >> peso;
+    insertarInicio( head,  tail,  id,  nombre, peso);
+    break;
+
+
+
+    case 3:
+    mostrarAdelante( head);
+    break;
+
+
+
+    case 4:  
+    mostrarAtras( tail);
+    break;
+
+
+
+    case 5:
+     cout << "ID a buscar: ";
+    cin >> id;
+
+    {
+        Nodo* encontrado = buscarPorId(head, id);
+
+        if (encontrado != nullptr)
+            cout << "Encontrado -> Nombre: " << encontrado->nombre
+                 << " | Peso: " << encontrado->peso << " kg\n";
+        else
+            cout << "No existe ese ID\n";
+    }
+    break;
+
+
+
+    case 6:  
+    cout << "ID a eliminar: ";
+        cin >> id;
+    eliminar( head,  tail,  id );
+    break;
+
+
+
+    case 7:  
+    liberarlist( head,  tail);
+     break;
+
+
+
+    case 8: 
+    cout << "Cantidad de paquetes: " << contarpacks(head) << endl;
+    break;
+
+
+
+    case 9: 
+    cout << "Saliendo del programa..." << endl;
+    break;
+
+
+    default: cout << "Seleccione una opcion valida." << endl;
+
+}
+} while (opcion != 9);
     return 0;
 }

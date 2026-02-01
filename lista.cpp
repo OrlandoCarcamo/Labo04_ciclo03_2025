@@ -48,7 +48,7 @@ void insertarFinal(Nodo*& head, Nodo*& tail, int id, string nombre, float peso) 
         return;
     }
 
-    Nodo* nuevo = new Nodo{id, nombre, peso, NULL, NULL}; //Si no existe,  se crea nuevo nodo :)
+    Nodo* nuevo = new Nodo{id, nombre, peso, 0, nullptr, nullptr}; //Si no existe,  se crea nuevo nodo :)
 
     if (head == NULL) {
         head = tail = nuevo;

@@ -89,18 +89,19 @@ void mostrarAtras(Nodo* tail) {
         aux = aux->ant;
     }
 }
-
+// Funcion eliminar, valida si la lista esta vacia, y si no, procede con el resto del codigo.
 bool eliminar(Nodo*& head, Nodo*& tail, int id ){
     if (head == nullptr) {
         cout << "La lista esta vacia"<< endl;
         return false;
     }
     Nodo* borrar = head;
-    
+    //Se estara ejecutando siempre y cuando el puntero no se encuentre con la lista vacia o el final de la lista
     while (borrar != nullptr){
-
+        // evalua si el dato ingresado es el mismo que se encuentra en el nodo.
         if (borrar->id == id){
             if (head == tail){
+                //manera resumida, en ves de colocar head = null; tail = null, me gusto, la vi en un video.
                 head = tail = nullptr;
             }
             else if (borrar == head){
@@ -123,12 +124,12 @@ bool eliminar(Nodo*& head, Nodo*& tail, int id ){
    
     borrar = borrar->sig;
 } 
-
+// en caso llegue al final, sale del while y por ende no se encontro el elemento 
         cout << "No se ha encontrado el id. " << endl;
         return false;
     
     }
-
+// funcion para liberar los elementos de la lista, se guarda el nodo actual y se mueve al siguiente antes de borrar
 void liberarlist(Nodo*& head, Nodo *& tail){
     Nodo* aux= head;
     while (aux != nullptr){
@@ -140,6 +141,17 @@ void liberarlist(Nodo*& head, Nodo *& tail){
    
     
 
+};
+
+int contarpacks(Nodo* head){
+   int contador = 0;
+    Nodo* aux = head;
+    //contador inicializado en 0,cada vez que ingrese al siguente se le sumara 1.
+    while (aux != nullptr){
+        contador++;
+        aux = aux->sig;
+    }
+    return contador;
 };
 
 int main(){

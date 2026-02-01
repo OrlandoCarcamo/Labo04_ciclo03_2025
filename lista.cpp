@@ -129,7 +129,18 @@ bool eliminar(Nodo*& head, Nodo*& tail, int id ){
     
     }
 
+void liberarlist(Nodo*& head, Nodo *& tail){
+    Nodo* aux= head;
+    while (aux != nullptr){
+        Nodo* borrar = aux;
+        aux = aux->sig;
+        delete borrar;
+    }
+    head = tail = nullptr;
+   
+    
 
+};
 
 int main(){
 

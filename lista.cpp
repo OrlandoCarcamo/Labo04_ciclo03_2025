@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 
@@ -155,6 +156,50 @@ int contarpacks(Nodo* head){
     }
     return contador;
 };
+void insertarOrdenado(Nodo*& head, Nodo*& tail, int id, string nombre, float peso) {
+    if (buscarPorId(head, id) != NULL) {
+        cout << " Error: ID repetido.\n";
+        return;
+    }
+
+    Nodo* nuevo = new Nodo{id, nombre, peso, NULL, NULL};
+
+    // 📌 Caso 1: Lista vacía
+    if (head == NULL) {
+        head = tail = nuevo;
+    }
+    // 📌 Caso 2: Va antes del primero
+    else if (id < head->id) {
+        nuevo->sig = head;
+        head->ant = nuevo;
+        head = nuevo;
+    }
+    else {
+        Nodo* aux = head;
+
+        // Buscar la posición correcta
+        while (aux->sig != NULL && aux->sig->id < id) {
+            aux = aux->sig;
+        }
+
+        // Caso 3: Insertar al final
+        if (aux->sig == NULL) {
+            aux->sig = nuevo;
+            nuevo->ant = aux;
+            tail = nuevo;
+        }
+        // Caso 4: Insertar en medio
+        else {
+            nuevo->sig = aux->sig;
+            nuevo->ant = aux;
+            aux->sig->ant = nuevo;
+            aux->sig = nuevo;
+        }
+    }
+
+    cout << "Paquete insertado ordenadamente.\n";
+}
+
 
 int main(){
 int id;
@@ -168,20 +213,29 @@ Nodo* tail = nullptr;
     do{
     cout << "......Bienvenido......" << endl;
     cout << "Seleccione una opcion:" << endl;
-    cout << "1) Insertar paquete al final." << endl;
-    cout << "2) Insertar paquete al inicio." << endl;
-    cout << "3) Mostrar lista adelante." << endl;
-    cout << "4) Mostrar lista atras." << endl;
-    cout << "5) Buscar paquete por id." << endl;
-    cout << "6) Eliminar paquete por id." << endl;
-    cout << "7) Liberar lista." << endl;
-    cout << "8) Mostrar cantidad de paquetes." << endl;
-    cout << "9) Salir." << endl;
+    cout << "1) Insertar paquete ordenadamente por id." << endl;
+    cout << "2) Insertar paquete al final." << endl;
+    cout << "3) Insertar paquete al inicio." << endl;
+    cout << "4) Mostrar lista adelante." << endl;
+    cout << "5) Mostrar lista atras." << endl;
+    cout << "6) Buscar paquete por id." << endl;
+    cout << "7) Eliminar paquete por id." << endl;
+    cout << "8) Liberar lista." << endl;
+    cout << "9) Mostrar cantidad de paquetes." << endl;
+    cout << "10) Salir." << endl;
 cin >> opcion;
 
 switch (opcion){
+    case 1:
+    cout << "ID: "; cin >> id;
+    cin.ignore();
+    cout << "Nombre: "; getline(cin, nombre);
+    cout << "Peso (kg): "; cin >> peso;
+    insertarOrdenado(head, tail, id, nombre, peso);
+    break;
+
     
-    case 1:    
+    case 2:    
     cout << "ID: ";
         cin >> id;
     cout << "Nombre: ";
@@ -193,7 +247,7 @@ switch (opcion){
 
 
 
-    case 2:  
+    case 3:  
     cout << "ID: ";
         cin >> id;
     cout << "Nombre: ";
@@ -205,19 +259,19 @@ switch (opcion){
 
 
 
-    case 3:
+    case 4:
     mostrarAdelante( head);
     break;
 
 
 
-    case 4:  
+    case 5:  
     mostrarAtras( tail);
     break;
 
 
 
-    case 5:
+    case 6:
      cout << "ID a buscar: ";
     cin >> id;
 
@@ -234,7 +288,7 @@ switch (opcion){
 
 
 
-    case 6:  
+    case 7:  
     cout << "ID a eliminar: ";
         cin >> id;
     eliminar( head,  tail,  id );
@@ -242,19 +296,19 @@ switch (opcion){
 
 
 
-    case 7:  
+    case 8:  
     liberarlist( head,  tail);
      break;
 
 
 
-    case 8: 
+    case 9: 
     cout << "Cantidad de paquetes: " << contarpacks(head) << endl;
     break;
 
 
 
-    case 9: 
+    case 10: 
     cout << "Saliendo del programa..." << endl;
     break;
 
@@ -262,6 +316,6 @@ switch (opcion){
     default: cout << "Seleccione una opcion valida." << endl;
 
 }
-} while (opcion != 9);
+} while (opcion != 10);
     return 0;
 }
